@@ -1,18 +1,18 @@
 package com.carpooling.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Car implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +21,9 @@ public class Car implements Serializable{
 	private String color;
 	private String category;
 	private String model;
+	
+	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+	private Set<Route> routes;
 	
 	public Car() {
 		super();
@@ -62,5 +65,15 @@ public class Car implements Serializable{
 	public void setModel(String model) {
 		this.model = model;
 	}
+	
+	public Set<Route> getRoutes(){
+		return routes;
+	}
+
+	public void setRoutes(Set<Route> routes) {
+		this.routes = routes;
+	}
+	
+	
 
 }
