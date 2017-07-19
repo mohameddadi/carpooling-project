@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -29,11 +30,17 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Route> routes;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private Set<Role> role;
+	@ManyToOne
+	private Role role;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private Set<Adress> adress;
+	@ManyToOne
+	private Adress adress;
+	
+	@OneToMany(mappedBy = "evaluatingUser", cascade = CascadeType.ALL)
+	private Set<Feedback> evaluatingUsers;
+	
+	@OneToMany(mappedBy = "evaluatedUser", cascade = CascadeType.ALL)
+	private Set<Feedback> evaluatedUsers;
 	
 	
 	public User() {
@@ -48,6 +55,26 @@ public class User implements Serializable {
 		this.smoker = smoker;
 		this.phone = phone;
 		this.email = email;
+	}
+	
+	
+	
+	public User(String firstName, String lastName, int age, String sexe, boolean smoker, String phone, String email,
+			Set<Route> routes,Role role, Adress adress, Set<Feedback> evaluatingUsers,
+			Set<Feedback> evaluatedUsers) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.sexe = sexe;
+		this.smoker = smoker;
+		this.phone = phone;
+		this.email = email;
+		this.routes = routes;
+		this.role = role;
+		this.adress = adress;
+		this.evaluatingUsers = evaluatingUsers;
+		this.evaluatedUsers = evaluatedUsers;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -103,11 +130,24 @@ public class User implements Serializable {
 	public void setRoutes(Set<Route> routes) {
 		this.routes = routes;
 	}
-	public Set<Role> getRole() {
-		return role;
+	
+	public Adress getAdress() {
+		return adress;
 	}
-	public void setRole(Set<Role> role) {
-		this.role = role;
+	public void setAdress(Adress adress) {
+		this.adress = adress;
+	}
+	public Set<Feedback> getEvaluatingUsers() {
+		return evaluatingUsers;
+	}
+	public void setEvaluatingUsers(Set<Feedback> evaluatingUsers) {
+		this.evaluatingUsers = evaluatingUsers;
+	}
+	public Set<Feedback> getEvaluatedUsers() {
+		return evaluatedUsers;
+	}
+	public void setEvaluatedUsers(Set<Feedback> evaluatedUsers) {
+		this.evaluatedUsers = evaluatedUsers;
 	}
 	
 	

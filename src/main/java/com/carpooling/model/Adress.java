@@ -1,12 +1,14 @@
 package com.carpooling.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Adress implements Serializable{
@@ -21,8 +23,8 @@ public class Adress implements Serializable{
 	private Long id;
 	private String adress;
 	
-	@ManyToOne
-	private User user;
+	@OneToMany(mappedBy = "adress", cascade = CascadeType.ALL)
+	private Set<User> users;
 	
 	public Adress() {
 		super();
