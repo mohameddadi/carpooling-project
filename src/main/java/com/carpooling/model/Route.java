@@ -29,6 +29,13 @@ public class Route implements Serializable{
 	@ManyToOne
 	private User user;
 	
+	@ManyToOne
+	private City departureCity;
+	
+	@ManyToOne
+	private City destinationCity;
+	
+	
 	public Route() {
 		super();
 		// TODO Auto-generated constructor stub
