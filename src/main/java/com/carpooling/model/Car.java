@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,6 +25,9 @@ public class Car implements Serializable{
 	
 	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
 	private Set<Route> routes;
+	
+	@ManyToOne
+	private User owner;
 	
 	public Car() {
 		super();
@@ -72,6 +76,12 @@ public class Car implements Serializable{
 
 	public void setRoutes(Set<Route> routes) {
 		this.routes = routes;
+	}
+	public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 	
 	

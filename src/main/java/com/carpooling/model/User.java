@@ -42,6 +42,15 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "evaluatedUser", cascade = CascadeType.ALL)
 	private Set<Feedback> evaluatedUsers;
 	
+	@OneToMany(mappedBy = "senderUser", cascade = CascadeType.ALL)
+	private Set<Message> senderUsers;
+	
+	@OneToMany(mappedBy = "recieverUser", cascade = CascadeType.ALL)
+	private Set<Message> recieverUsers;
+	
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	private Set<Car> cars;
+	
 	
 	public User() {
 		super();
@@ -149,7 +158,30 @@ public class User implements Serializable {
 	public void setEvaluatedUsers(Set<Feedback> evaluatedUsers) {
 		this.evaluatedUsers = evaluatedUsers;
 	}
-	
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public Set<Message> getSenderUsers() {
+		return senderUsers;
+	}
+	public void setSenderUsers(Set<Message> senderUsers) {
+		this.senderUsers = senderUsers;
+	}
+	public Set<Message> getRecieverUsers() {
+		return recieverUsers;
+	}
+	public void setRecieverUsers(Set<Message> recieverUsers) {
+		this.recieverUsers = recieverUsers;
+	}
+	public Set<Car> getCars() {
+		return cars;
+	}
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
+	}
 	
 	
 

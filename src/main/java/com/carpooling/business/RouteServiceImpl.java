@@ -19,4 +19,7 @@ public class RouteServiceImpl implements RouteService {
 		return routeRepository.findAll();
 	}
 
+	public List<Route> getRoutesById(Long id){
+		return routeRepository.findByUserId(id);
+	}
 }
