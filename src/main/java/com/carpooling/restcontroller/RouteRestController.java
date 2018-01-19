@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.carpooling.business.RouteService;
 import com.carpooling.model.Route;
+import com.carpooling.service.RouteService;
 
 @RestController
 public class RouteRestController {

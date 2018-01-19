@@ -1,4 +1,4 @@
-package com.carpooling.business;
+package com.carpooling.service;
 
 import java.util.List;
 

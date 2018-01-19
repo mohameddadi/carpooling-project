@@ -1,12 +1,13 @@
-package com.carpooling.business;
+package com.carpooling.serviceImpl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.carpooling.dao.RouteRepository;
 import com.carpooling.model.Route;
+import com.carpooling.repository.RouteRepository;
+import com.carpooling.service.RouteService;
 
 @Service
 public class RouteServiceImpl implements RouteService {

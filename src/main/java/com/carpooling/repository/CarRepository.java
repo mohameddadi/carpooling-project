@@ -1,4 +1,4 @@
-package com.carpooling.dao;
+package com.carpooling.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

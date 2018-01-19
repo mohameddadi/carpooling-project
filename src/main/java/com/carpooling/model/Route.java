@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,12 +24,11 @@ public class Route implements Serializable{
 	private Date dateOfDeparture;
 	private Date arrivalDate;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Car car;
 	
 	@ManyToOne
 	private User user;
-	
 	@ManyToOne
 	private City departureCity;
 	

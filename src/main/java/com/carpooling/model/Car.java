@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Car implements Serializable{
 	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
 	private Set<Route> routes;
 	
-	@ManyToOne
+	@ManyToOne()
 	private User owner;
 	
 	public Car() {
