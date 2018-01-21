@@ -12,6 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.carpooling.utils.EntityIdResolver;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+@JsonIdentityInfo(
+		property  = "id", 
+		scope     = Car.class,
+		resolver = EntityIdResolver.class,
+		generator = ObjectIdGenerators.PropertyGenerator.class)
 @Entity
 public class Car implements Serializable{
 
@@ -21,25 +33,48 @@ public class Car implements Serializable{
 	private Long id;
 	private int nbrPlace ;
 	private String color;
-	private String category;
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private CarCatergories carCategory;
+	
 	private String model;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
 	private Set<Route> routes;
 	
-	@ManyToOne()
+	
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User owner;
 	
 	public Car() {
-		super();
+	
 	}
-	public Car(int nbrPlace, String color, String category, String model) {
-		super();
+	
+	
+	public Car(int nbrPlace, String color, CarCatergories carCategory, String model, Set<Route> routes, User owner) {
 		this.nbrPlace = nbrPlace;
 		this.color = color;
-		this.category = category;
+		this.carCategory = carCategory;
 		this.model = model;
+		this.routes = routes;
+		this.owner = owner;
 	}
+
+
+
+	public Car(Long id, int nbrPlace, String color, CarCatergories Carcategory,
+			String model, Set<Route> routes, User owner) {
+		this.id = id;
+		this.nbrPlace = nbrPlace;
+		this.color = color;
+		this.carCategory = Carcategory;
+		this.model = model;
+		this.routes = routes;
+		this.owner = owner;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -58,12 +93,7 @@ public class Car implements Serializable{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
+	
 	public String getModel() {
 		return model;
 	}
@@ -84,6 +114,17 @@ public class Car implements Serializable{
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
+
+
+	public CarCatergories getCarCategory() {
+		return carCategory;
+	}
+
+
+	public void setCarCategory(CarCatergories carCategory) {
+		this.carCategory = carCategory;
+	}
+	
 	
 	
 

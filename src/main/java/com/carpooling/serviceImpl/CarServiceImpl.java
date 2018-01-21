@@ -3,6 +3,7 @@ package com.carpooling.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,21 @@ public class CarServiceImpl implements CarService{
 		return carRepository.findAll();
 	}
 
-	public ResponseEntity<?> getCarById(Long id){
-		Car car = carRepository.getOne(id);
-		if(car == null){
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Car>(car, HttpStatus.OK);
+	public Car getCarById(Long id){
+		return carRepository.getOne(id);
 	}
+
+	
+	public void createCar(Car car) {
+		carRepository.saveAndFlush(car);
+	}
+
+	@Override
+	public void deleteCar(Long id) {
+		// TODO Auto-generated method stub
+		carRepository.delete(id);
+	}
+
+	
+	
 }

@@ -10,6 +10,10 @@ public interface CarService {
 	
 	public List<Car> getAllCars();
 	
-	public ResponseEntity<?> getCarById(Long id);
+	public Car getCarById(Long id);
+	
+	public void createCar(Car car);
+	
+	public void deleteCar(Long id);
 
 }

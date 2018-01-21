@@ -5,12 +5,24 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.carpooling.utils.EntityIdResolver;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+@JsonIdentityInfo(
+		property  = "id", 
+		scope     = User.class,
+		resolver = EntityIdResolver.class,
+		generator = ObjectIdGenerators.PropertyGenerator.class)
 @Entity
 public class User implements Serializable {
 
@@ -28,36 +40,48 @@ public class User implements Serializable {
 	private String email;
 	private String username;
     private String password;
-    private String passwordConfirm;
 	
+    @JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Route> routes;
 	
+    @JsonIgnore
 	@ManyToOne
 	private Role role;
 	
+    @JsonIgnore
 	@ManyToOne
 	private Adress adress;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "evaluatingUser", cascade = CascadeType.ALL)
 	private Set<Feedback> evaluatingUsers;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "evaluatedUser", cascade = CascadeType.ALL)
 	private Set<Feedback> evaluatedUsers;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "senderUser", cascade = CascadeType.ALL)
 	private Set<Message> senderUsers;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "recieverUser", cascade = CascadeType.ALL)
 	private Set<Message> recieverUsers;
 	
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner", fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	private Set<Car> cars;
 	
 	
 	public User() {
-		super();
+		
 	}
+	
+	public User(Long id) {
+		this.id = id;
+	}
+	
 	public User(String firstName, String lastName, int age, String sexe, boolean smoker, String phone, String email) {
 		super();
 		this.firstName = firstName;
@@ -197,13 +221,5 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPasswordConfirm() {
-		return passwordConfirm;
-	}
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
-	}
-	
-	
 
 }
