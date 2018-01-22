@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.carpooling.utils.EntityIdResolver;
@@ -18,11 +19,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(
 		property  = "id", 
-		scope     = CarCatergories.class,
+		scope     = CarModel.class,
 		resolver = EntityIdResolver.class,
 		generator = ObjectIdGenerators.PropertyGenerator.class)
 @Entity
-public class CarCatergories implements Serializable{
+public class CarModel implements Serializable{
 
 	/**
 	 * 
@@ -33,24 +34,28 @@ public class CarCatergories implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String category;
+	private String model;
 	
 	private String code;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "carCategory", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "carModel", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Car> cars;
 	
-	public CarCatergories(Long id) {
-		this.id = id;
-	}
+	@JsonIgnore
+	@ManyToOne(fetch=FetchType.LAZY)
+	private CarBrand carBrand;
+	
 
-	public CarCatergories() {
+	public CarModel() {
 	}
 	
-	public CarCatergories(Long id, String category, String code, Set<Car> cars) {
+	public CarModel(Long id) {
 		this.id = id;
-		this.category = category;
+	}
+	
+	public CarModel(Long id, String model, String code, Set<Car> cars) {
+		this.id = id;
+		this.model = model;
 		this.code = code;
 		this.cars = cars;
 	}
@@ -64,11 +69,11 @@ public class CarCatergories implements Serializable{
 	}
 
 	public String getCategory() {
-		return category;
+		return model;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategory(String model) {
+		this.model = model;
 	}
 
 	public String getCode() {

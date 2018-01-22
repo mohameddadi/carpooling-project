@@ -8,6 +8,4 @@ public interface RouteService {
 
 	public List<Route> getAllRoutes();
 	
-	public List<Route> getRoutesById(Long id);
-	
 }

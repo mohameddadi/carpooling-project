@@ -13,9 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.carpooling.utils.EntityIdResolver;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(
@@ -40,11 +38,7 @@ public class User implements Serializable {
 	private String email;
 	private String username;
     private String password;
-	
-    @JsonIgnore
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private Set<Route> routes;
-	
+    
     @JsonIgnore
 	@ManyToOne
 	private Role role;
@@ -96,7 +90,7 @@ public class User implements Serializable {
 	
 	
 	public User(String firstName, String lastName, int age, String sexe, boolean smoker, String phone, String email,
-			Set<Route> routes,Role role, Adress adress, Set<Feedback> evaluatingUsers,
+			Role role, Adress adress, Set<Feedback> evaluatingUsers,
 			Set<Feedback> evaluatedUsers) {
 		super();
 		this.firstName = firstName;
@@ -106,7 +100,6 @@ public class User implements Serializable {
 		this.smoker = smoker;
 		this.phone = phone;
 		this.email = email;
-		this.routes = routes;
 		this.role = role;
 		this.adress = adress;
 		this.evaluatingUsers = evaluatingUsers;
@@ -159,12 +152,6 @@ public class User implements Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Set<Route> getRoutes() {
-		return routes;
-	}
-	public void setRoutes(Set<Route> routes) {
-		this.routes = routes;
 	}
 	
 	public Adress getAdress() {

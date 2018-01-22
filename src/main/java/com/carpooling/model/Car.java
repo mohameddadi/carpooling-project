@@ -33,12 +33,11 @@ public class Car implements Serializable{
 	private Long id;
 	private int nbrPlace ;
 	private String color;
-	
+	private String energy;
+	private String fiscalPower;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	private CarCatergories carCategory;
-	
-	private String model;
+	private CarModel carModel;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
@@ -51,29 +50,21 @@ public class Car implements Serializable{
 	public Car() {
 	
 	}
-	
-	
-	public Car(int nbrPlace, String color, CarCatergories carCategory, String model, Set<Route> routes, User owner) {
+
+
+	public Car(int nbrPlace, String color, String energy, String fiscalPower, 
+			CarModel carModel, Set<Route> routes,
+			User owner) {
+		super();
 		this.nbrPlace = nbrPlace;
 		this.color = color;
-		this.carCategory = carCategory;
-		this.model = model;
+		this.energy = energy;
+		this.fiscalPower = fiscalPower;
+		this.carModel = carModel;
 		this.routes = routes;
 		this.owner = owner;
 	}
 
-
-
-	public Car(Long id, int nbrPlace, String color, CarCatergories Carcategory,
-			String model, Set<Route> routes, User owner) {
-		this.id = id;
-		this.nbrPlace = nbrPlace;
-		this.color = color;
-		this.carCategory = Carcategory;
-		this.model = model;
-		this.routes = routes;
-		this.owner = owner;
-	}
 
 	public Long getId() {
 		return id;
@@ -94,13 +85,6 @@ public class Car implements Serializable{
 		this.color = color;
 	}
 	
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
-	
 	public Set<Route> getRoutes(){
 		return routes;
 	}
@@ -116,16 +100,44 @@ public class Car implements Serializable{
 	}
 
 
-	public CarCatergories getCarCategory() {
-		return carCategory;
+	public CarModel getCarCategory() {
+		return carModel;
 	}
 
 
-	public void setCarCategory(CarCatergories carCategory) {
-		this.carCategory = carCategory;
+	public void setCarCategory(CarModel carModel) {
+		this.carModel = carModel;
 	}
-	
-	
+
+
+	public String getEnergy() {
+		return energy;
+	}
+
+
+	public void setEnergy(String energy) {
+		this.energy = energy;
+	}
+
+
+	public String getFiscalPower() {
+		return fiscalPower;
+	}
+
+
+	public void setFiscalPower(String fiscalPower) {
+		this.fiscalPower = fiscalPower;
+	}
+
+
+	public CarModel getCarModel() {
+		return carModel;
+	}
+
+
+	public void setCarModel(CarModel carModel) {
+		this.carModel = carModel;
+	}
 	
 
 }

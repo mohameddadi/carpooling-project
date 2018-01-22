@@ -9,5 +9,4 @@ import com.carpooling.model.Route;
 
 public interface RouteRepository extends JpaRepository<Route, Long>{
 
-	List<Route> findByUserId(Long id);
 }

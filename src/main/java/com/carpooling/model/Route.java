@@ -28,8 +28,6 @@ public class Route implements Serializable{
 	private Car car;
 	
 	@ManyToOne
-	private User user;
-	@ManyToOne
 	private City departureCity;
 	
 	@ManyToOne
