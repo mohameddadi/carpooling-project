@@ -99,17 +99,6 @@ public class Car implements Serializable{
 		this.owner = owner;
 	}
 
-
-	public CarModel getCarCategory() {
-		return carModel;
-	}
-
-
-	public void setCarCategory(CarModel carModel) {
-		this.carModel = carModel;
-	}
-
-
 	public String getEnergy() {
 		return energy;
 	}

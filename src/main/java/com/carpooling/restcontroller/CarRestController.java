@@ -49,6 +49,14 @@ public class CarRestController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 	
+	
+	@RequestMapping(value = "/car/", method = RequestMethod.PUT,headers="Accept=application/json",
+			consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json; charset=UTF-8")
+	@ResponseBody public ResponseEntity<?> updateCar(@RequestBody Car car){
+		carService.updateCar(car);
+        return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+	}
+	
 	@RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE)
 	@ResponseBody public ResponseEntity<?> deleteCar(@PathVariable("id") Long id){
 		Car car = carService.getCarById(id);

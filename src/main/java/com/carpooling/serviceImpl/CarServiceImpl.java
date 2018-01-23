@@ -40,6 +40,20 @@ public class CarServiceImpl implements CarService{
 		carRepository.delete(id);
 	}
 
+	@Override
+	@Transactional
+	public void updateCar(Car car) {
+		// TODO Auto-generated method stub
+		if(car.getCarModel() != null){
+			carRepository.updateCar(car.getId(), car.getNbrPlace(), car.getColor(),
+					car.getEnergy(), car.getFiscalPower(), car.getCarModel().getId());
+		}else{
+			carRepository.updateCar(car.getId(), car.getNbrPlace(), car.getColor(),
+					car.getEnergy(), car.getFiscalPower(), null);
+		}
+		
+	}
+
 	
 	
 }
